@@ -8,7 +8,7 @@ Description
 -----------
 
 Ohm is a library for storing objects in Redis, a persistent
-key-value database. This Lua scripts can be sent to Redis with the
+key-value database. These Lua scripts can be sent to Redis with the
 EVAL command, and they abstract the behavior of keeping indices
 and unique indices in sync with the object.
 
@@ -24,9 +24,10 @@ updating zero or more sets (indices) and zero or more hashes
 ### model
 
 Table with three attributes:
-   id (model instance id)
-   key (hash where the attributes will be saved)
-   name (model name)
+
+   - id (model instance id)
+   - key (hash where the attributes will be saved)
+   - name (model name)
 
 ### attrs
 
