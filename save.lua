@@ -6,10 +6,11 @@
 --
 -- # model
 --
--- Table with three attributes:
---    id (model instance id)
---    key (hash where the attributes will be saved)
+-- Table with one or two attributes:
 --    name (model name)
+--    id (model instance id, optional)
+--
+-- If the id is not provided, it is treated as a new record.
 --
 -- # attrs
 --
@@ -35,6 +36,12 @@ local indices = cmsgpack.unpack(ARGV[3])
 local uniques = cmsgpack.unpack(ARGV[4])
 
 local function save(model, attrs)
+  if model.id == nil then
+    model.id = redis.call("INCR", model.name .. ":id")
+  end
+
+  model.key = model.name .. ":" .. model.id
+
   redis.call("SADD", model.name .. ":all", model.id)
   redis.call("DEL", model.key)
 
