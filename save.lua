@@ -122,4 +122,4 @@ index(model, indices)
 remove_uniques(model, uniques)
 unique(model, uniques)
 
-return model.id
+return tostring(model.id)
