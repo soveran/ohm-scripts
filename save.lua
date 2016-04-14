@@ -1,5 +1,5 @@
 -- This script receives four parameters, all encoded with
--- MessagePack. The decoded values are used for saving a model
+-- JSON. The decoded values are used for saving a model
 -- instance in Redis, creating or updating a hash as needed and
 -- updating zero or more sets (indices) and zero or more hashes
 -- (unique indices).
@@ -30,10 +30,10 @@
 -- value), an error is returned with the UniqueIndexViolation
 -- message and the field that triggered the error.
 --
-local model   = cmsgpack.unpack(ARGV[1])
-local attrs   = cmsgpack.unpack(ARGV[2])
-local indices = cmsgpack.unpack(ARGV[3])
-local uniques = cmsgpack.unpack(ARGV[4])
+local model   = cjson.decode(ARGV[1])
+local attrs   = cjson.decode(ARGV[2])
+local indices = cjson.decode(ARGV[3])
+local uniques = cjson.decode(ARGV[4])
 
 local function save(model, attrs)
 	if model.id == nil then
@@ -78,9 +78,10 @@ end
 local function unique(model, uniques)
 	for field, value in pairs(uniques) do
 		local key = model.name .. ":uniques:" .. field
+		local val = tostring(value)
 
-		redis.call("HSET", model.key .. ":_uniques", key, value)
-		redis.call("HSET", key, value, model.id)
+		redis.call("HSET", model.key .. ":_uniques", key, val)
+		redis.call("HSET", key, val, model.id)
 	end
 end
 
