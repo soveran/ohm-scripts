@@ -76,7 +76,7 @@ Usage
 -----
 
 These scripts are intended to be used in the context of other
-libraries. Right now they are implemented in v2 of Ohm, for which
-a release candidate exists. Other libraries are encouraged to use
-this scripts, with the benefit of achieving cross language
+libraries. Right now they are implemented by
+[Ohm](http://ohm.keyvalue.org). Other libraries are encouraged to
+use these scripts, with the benefit of achieving cross language
 compatibility.
