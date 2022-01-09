@@ -16,7 +16,7 @@ save.lua
 --------
 
 This script receives four parameters, all encoded with
-MessagePack. The decoded values are used for saving a model
+JSON. The decoded values are used for saving a model
 instance in Redis, creating or updating a hash as needed and
 updating zero or more sets (indices) and zero or more hashes
 (unique indices).
@@ -51,7 +51,7 @@ delete.lua
 ----------
 
 This script receives three parameters, all encoded with
-MessagePack. The decoded values are used for deleting a model
+JSON. The decoded values are used for deleting a model
 instance in Redis and removing any reference to it in sets
 (indices) and hashes (unique indices).
 
